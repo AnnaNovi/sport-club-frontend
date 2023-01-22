@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./clients/clients.module').then((m) => m.ClientsModule),
       },
+      {
+        path: '**',
+        loadChildren: () =>
+          import('./not-found/not-found.module').then((m) => m.NotFoundModule),
+      },
     ],
   },
 ];

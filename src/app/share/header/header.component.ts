@@ -1,34 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  public menuItems = [
-    {
-      icon: 'person',
-      title: 'Клиенты',
-      routerLink: '/clients',
-    },
-    {
-      icon: 'person',
-      title: 'Тренеры',
-      routerLink: '/trainers',
-    },
-  ];
+  @Output() toggle_menu = new EventEmitter();
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor() {}
 
-  public goTo(link: string) {
-    console.log(
-      '🚀 ~ file: header.component.ts:25 ~ HeaderComponent ~ goTo ~ link',
-      link
-    );
-    // this.router.navigate([], {
-    //   relativeTo: this.route
-    // });
-    this.router.navigateByUrl('/page' + link);
+  public toggleMenu() {
+    this.toggle_menu.emit();
   }
 }

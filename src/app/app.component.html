@@ -1,1 +1,34 @@
-<router-outlet></router-outlet>
+<mat-drawer-container
+  [ngStyle]="{
+    'height.vh': 100
+  }"
+>
+  <mat-drawer
+    #drawer
+    mode="side"
+    [opened]="
+      ['XLarge', 'Large', 'Medium'].includes(
+        breakpointsSrv.currentScreenSize
+      ) && menuSrv.isMenuOpened
+    "
+    [ngStyle]="{
+      display: 'grid',
+      'grid-template-row': 'repeat(' + menuSrv.menuItems.length + ', 1fr)'
+    }"
+  >
+    <app-menu-item
+      *ngFor="let menu of menuSrv.menuItems"
+      [titleNote]="menu.title"
+      [icon]="menu.icon"
+      (click)="goTo(menu.routerLink)"
+    >
+    </app-menu-item>
+  </mat-drawer>
+
+  <app-header
+    (toggle_menu)="menuSrv.isMenuOpened = !menuSrv.isMenuOpened"
+  ></app-header>
+  <div [ngStyle]="{ 'padding.px': 20 }">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
